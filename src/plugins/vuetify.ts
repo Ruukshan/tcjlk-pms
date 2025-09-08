@@ -1,6 +1,5 @@
 // Styles
 import "vuetify/styles";
-import "@mdi/font/css/materialdesignicons.css";
 
 // Vuetify
 import { createVuetify } from "vuetify";
@@ -19,6 +18,7 @@ export default createVuetify({
           secondary: "#362E17",
           button: "#FAC738",
           error: "#ff0000ff",
+          background: "#FFFFFF",
         },
       },
     },
@@ -32,10 +32,12 @@ export default createVuetify({
     VTextField: {
         variant: 'outlined',
         density: 'compact',
-        color: 'secondary',
+        color: 'background',
     },
-    VCard: {
-        color: 'primary',
+    VSelect: {
+        variant: 'outlined',
+        density: 'compact',
+        color: 'secondary',
     },
     VCardTitle: {
         style: {
