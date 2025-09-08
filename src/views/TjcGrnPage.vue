@@ -2,83 +2,145 @@
     <v-container>
         <v-card color="primary">
             <v-card-title>
-            <NavBar title="GRN "/>
+                <NavBar title="GRN "/>
             </v-card-title>
             <v-card-text>
-                <v-row justify="center">
-                    <v-col cols="12" md="6">
-                        <v-text-field 
-                            label="Item" 
-                            bg-color="secondary"
-                        ></v-text-field>
-                    </v-col>
-                    <v-col cols="12" md="6">
-                        <v-select
-                            label="Supplier" 
-                            bg-color="secondary"
-                        ></v-select>
-                    </v-col>
-                    <v-col cols="12" md="6">
-                        <v-text-field 
-                            label="Quantity" 
-                            bg-color="secondary"
-                        ></v-text-field>
-                    </v-col>
-                    <v-col cols="12" md="6">
-                        <v-text-field 
-                            label="Quality" 
-                            bg-color="secondary"
-                        ></v-text-field>
-                    </v-col> 
-                    <v-col cols="12" md="6">
-                        <v-text-field 
-                            label="Unit" 
-                            bg-color="secondary"
-                        ></v-text-field>
-                    </v-col>
-                    <v-col cols="12" md="6">
-                        <v-text-field 
-                            label="QA Acceptance" 
-                            bg-color="secondary"
-                        ></v-text-field>
-                    </v-col>
-                    <v-col cols="12" md="6">
-                        <v-text-field 
-                            label="Remarks" 
-                            bg-color="secondary">
-                        </v-text-field>
-                    </v-col> 
-                    <v-col cols="12" md="6">
-                        <v-text-field 
-                            label="Storage Slot" 
-                            bg-color="secondary"
-                        ></v-text-field>
-                    </v-col>
-                    <v-col cols="12" md="6">
-                        <v-text-field 
-                            label="Invoice Ref/GRN" 
-                            bg-color="secondary"
-                        ></v-text-field>
-                    </v-col>
-                    <v-col cols="12" md="6">
-                        <v-text-field 
-                            label="Stock Review Verify Date" 
-                            bg-color="secondary"
-                            type="date"
-                        ></v-text-field>
-                    </v-col> 
-                    <v-col cols="12" md="6">
-                        <v-btn @click="submit">Submit</v-btn>
-                    </v-col>
-                </v-row>
+                <v-form ref="form">
+                    <v-row justify="center">
+                        <v-col cols="12" md="6">
+                            <v-text-field 
+                                label="Item" 
+                                clearable
+                                :rules="itemRules"
+                            ></v-text-field>
+                        </v-col>
+                        <v-col cols="12" md="6">
+                            <v-select
+                                label="Supplier"
+                                :items="suppliers" 
+                                clearable
+                                :rules="supplierRules"
+                            ></v-select>
+                        </v-col>
+                        <v-col cols="12" md="6">
+                            <v-text-field 
+                                label="Quantity"
+                                clearable 
+                                :rules="quantityRules"
+                            ></v-text-field>
+                        </v-col>
+                        <v-col cols="12" md="6">
+                            <v-text-field 
+                                label="Quality"
+                                clearable 
+                                :rules="qualityRules"
+                            ></v-text-field>
+                        </v-col> 
+                        <v-col cols="12" md="6">
+                            <v-text-field 
+                                label="Unit"
+                                clearable
+                                :rules="unitRules"
+                            ></v-text-field>
+                        </v-col>
+                        <v-col cols="12" md="6">
+                            <v-text-field 
+                                label="QA Acceptance"
+                                clearable
+                                :rules="qaAcceptanceRules"
+                            ></v-text-field>
+                        </v-col>
+                        <v-col cols="12" md="6">
+                            <v-text-field 
+                                label="Remarks"
+                                clearable
+                            ></v-text-field>
+                        </v-col> 
+                        <v-col cols="12" md="6">
+                            <v-text-field 
+                                label="Storage Slot"
+                                claearable 
+                                :rules="storageSlotRules"
+                            ></v-text-field>
+                        </v-col>
+                        <v-col cols="12" md="6">
+                            <v-text-field 
+                                label="Invoice Ref/GRN"
+                                clearable
+                                :rules="invoiceRefRules"
+                            ></v-text-field>
+                        </v-col>
+                        <v-col cols="12" md="6">
+                            <v-text-field 
+                                label="Stock Review Verify Date" 
+                                type="date"
+                                clearable
+                                :rules="stockReviewVerifyDateRules"
+                            ></v-text-field>
+                        </v-col> 
+                        <v-col cols="12" md="6">
+                            <v-btn @click="submit">Submit</v-btn>
+                        </v-col>
+                    </v-row>
+                </v-form>
             </v-card-text>
-        </v-card>
-        
+        </v-card>  
     </v-container>
 </template>
 
 <script setup>
 import NavBar from "../components/Navbar.vue";
+import { ref } from 'vue';
+
+const form = ref(null);
+
+const suppliers = [
+    'Supplier 1',
+    'Supplier 2',
+    'Supplier 3',
+]
+
+const itemRules = [
+    v => !!v || 'Item is required',
+]
+
+const supplierRules = [
+    v => !!v || 'Supplier is required',
+]
+
+const quantityRules = [
+    v => !!v || 'Quantity is required',
+]
+
+const qualityRules = [
+    v => !!v || 'Quality is required',
+]
+
+const unitRules = [
+    v => !!v || 'Unit is required',
+]
+
+const qaAcceptanceRules = [
+    v => !!v || 'QA Acceptance is required',
+]
+
+const storageSlotRules = [
+    v => !!v || 'Storage Slot is required',
+]
+
+const invoiceRefRules = [
+    v => !!v || 'Invoice Ref/GRN is required',
+]
+
+const stockReviewVerifyDateRules = [
+    v => !!v || 'Stock Review Verify Date is required',
+]
+
+const submit = () => {
+    if (form.value.validate()) {
+        // Submit form data
+    }
+}
 </script>
 
 <style scoped>

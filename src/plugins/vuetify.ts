@@ -1,5 +1,6 @@
 // Styles
 import "vuetify/styles";
+import "@mdi/font/css/materialdesignicons.css"
 
 // Vuetify
 import { createVuetify } from "vuetify";
@@ -32,7 +33,9 @@ export default createVuetify({
     VTextField: {
         variant: 'outlined',
         density: 'compact',
-        color: 'background',
+        baseColor: 'background',
+        bgColor: 'secondary',
+        clearableIcon: 'mdi-close-circle',
     },
     VSelect: {
         variant: 'outlined',
