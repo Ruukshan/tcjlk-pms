@@ -114,6 +114,33 @@ const formData = ref({
 // Sample select data
 const conditions = ['Good', 'Bad', 'Average'];
 
+// Validation Rules
+const approvalStatusRules = [
+    v => !!v || 'Approval status is required',
+];
+const cleanlinessProducitonRules = [
+    v => !!v || 'Cleanliness production is required',
+];
+const hygineStatusRules = [
+    v => !!v || 'Hygine status is required',
+];
+const exhaustTempratureRules = [
+    v => !!v || 'Exhaust temprature is required',
+];
+const bodyLengthRules = [
+    v => !!v || 'Body length is required',
+];
+const hookLengthRules = [
+    v => !!v || 'Hook length is required',
+];
+const overlapPercentageRules = [
+    v => !!v || 'Overlap percentage is required',
+];
+const seamerConditionRules = [
+    v => !!v || 'Seamer condition is required',
+];
+
+
 </script>
 
 <style scoped>
