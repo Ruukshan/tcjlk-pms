@@ -175,18 +175,20 @@
             </div>
 
             <!-- Quality Check -->
-            <div>
-              <div class="quality-check-section">
-                <v-checkbox
-                  v-model="formData.qualityCheck"
-                  color="button"
-                  hide-details
+            <div style="
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+              ">
+              <v-label>Quality Check</v-label>
+              <v-checkbox
+                v-model="formData.qualityCheck"
+                color="button"
+                hide-details
                 >
-                  <template #label>
-                    <span class="field-label">Quality Check</span>
-                  </template>
+    
                 </v-checkbox>
-              </div>
+              
             </div>
 
             <!-- Submit Button -->
