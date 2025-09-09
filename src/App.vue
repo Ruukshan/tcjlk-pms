@@ -1,9 +1,11 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
+
+import TjcPackingPage from './views/TjcPackingPage.vue'
 </script>
 
 <template>
-  
+
+  <TjcPackingPage />
 </template>
 
 <style scoped>
