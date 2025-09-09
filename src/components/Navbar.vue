@@ -23,3 +23,28 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.navbar {
+  display: flex;
+  align-items: center;
+  background-color: #1a150d;
+  color: white;
+  padding: 12px 16px;
+}
+
+.back-btn {
+  font-size: 20px;
+  margin-right: 12px;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: bold;
+}
+</style>
+

@@ -1,15 +1,14 @@
-<script setup>
-import TjcPackingPage from "./views/TjcPackingPage.vue";
-
-</script>
-
 <template>
   <v-app>
     <TjcPackingPage />
-
-    
-   
+     <TjcGrnPage /> 
   </v-app>
 </template>
 
-<style scoped></style>
+<script setup>
+import TjcGrnPage from "./views/TjcGrnPage.vue";
+import TjcPackingPage from "./views/TjcPackingPage.vue";
+</script>
+
+<style scoped>
+</style>

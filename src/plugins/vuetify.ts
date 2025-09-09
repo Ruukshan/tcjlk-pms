@@ -1,6 +1,6 @@
 // Styles
 import "vuetify/styles";
-import "@mdi/font/css/materialdesignicons.css";
+import "@mdi/font/css/materialdesignicons.css"
 
 // Vuetify
 import { createVuetify } from "vuetify";
@@ -37,6 +37,17 @@ export default createVuetify({
     },
     VCard: {
       color: "primary",
+        variant: 'outlined',
+        density: 'compact',
+        baseColor: 'background',
+        bgColor: 'secondary',
+        clearable: true,
+    },
+    VSelect: {
+        variant: 'outlined',
+        density: 'compact',
+        color: 'secondary',
+        clearable: true,
     },
     VCardTitle: {
       style: {
