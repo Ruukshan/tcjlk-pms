@@ -25,6 +25,12 @@ export default createVuetify({
     },
   },
   defaults: {
+    VContainer: {
+        class: 'bg-primary',
+    },
+    VCard: {
+        color: 'primary',
+    },
     VBtn: {
       rounded: "lg",
       color: "button",
@@ -39,7 +45,7 @@ export default createVuetify({
       color: "primary",
         variant: 'outlined',
         density: 'compact',
-        baseColor: 'background',
+        baseColor: 'white',
         bgColor: 'secondary',
         clearable: true,
     },
