@@ -271,6 +271,7 @@ const rules = {
     const selected = new Date(value);
     const today = new Date();
     today.setHours(0, 0, 0, 0);
+    selected.setHours(0, 0, 0, 0);
     return selected <= today || "Date cannot be in the future";
   },
 };
