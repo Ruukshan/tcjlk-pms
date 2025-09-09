@@ -2,7 +2,6 @@
   <v-main>
     <v-container fluid>
       <v-card elevation="0">
-        <!-- Header -->
         <Navbar title="Packing" />
         <v-spacer></v-spacer>
         <v-card-text>
@@ -65,7 +64,7 @@
               />
             </div>
 
-            <!-- Checked Switch Toggle -->
+            <!-- Checked Switch  -->
             <div
               style="
                 display: flex;
@@ -89,7 +88,7 @@
               />
             </div>
 
-            <!-- Production and Reject Count Row -->
+            <!-- Production and Reject Count -->
             <div>
               <v-row no-gutters>
                 <v-col cols="6" class="pr-2">
@@ -115,7 +114,7 @@
               </v-row>
             </div>
 
-            <!-- Label Conformation Details -->
+            <!-- Label Conformation-->
             <div>
               <v-label>Label Conformation Details</v-label>
               <v-text-field
@@ -278,7 +277,7 @@ const rules = {
 
 // Methods
 const goBack = () => {
-  // Implement navigation back logic
+  // navigation back
   console.log("Going back...");
 };
 
