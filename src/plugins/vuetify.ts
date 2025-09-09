@@ -1,6 +1,6 @@
 // Styles
 import "vuetify/styles";
-import "@mdi/font/css/materialdesignicons.css"
+import "@mdi/font/css/materialdesignicons.css";
 
 // Vuetify
 import { createVuetify } from "vuetify";
@@ -26,11 +26,9 @@ export default createVuetify({
   },
   defaults: {
     VContainer: {
-        class: 'bg-primary',
+      class: "bg-primary",
     },
-    VCard: {
-        color: 'primary',
-    },
+
     VBtn: {
       rounded: "lg",
       color: "button",
@@ -43,17 +41,17 @@ export default createVuetify({
     },
     VCard: {
       color: "primary",
-        variant: 'outlined',
-        density: 'compact',
-        baseColor: 'white',
-        bgColor: 'secondary',
-        clearable: true,
+      variant: "outlined",
+      density: "compact",
+      baseColor: "white",
+      bgColor: "secondary",
+      clearable: true,
     },
     VSelect: {
-        variant: 'outlined',
-        density: 'compact',
-        color: 'secondary',
-        clearable: true,
+      variant: "outlined",
+      density: "compact",
+      color: "secondary",
+      clearable: true,
     },
     VCardTitle: {
       style: {

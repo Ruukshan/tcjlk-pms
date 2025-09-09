@@ -1,5 +1,4 @@
 <template>
-
   <v-main>
     <v-container fluid>
       <v-card elevation="0">
@@ -233,4 +232,6 @@ const submitForm = async () => {
 div {
   margin-bottom: 18px;
 }
+
+
 </style>
