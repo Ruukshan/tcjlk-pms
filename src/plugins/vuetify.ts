@@ -41,14 +41,6 @@ export default createVuetify({
       density: "compact",
       color: "secondary",
     },
-    VCard: {
-      color: "primary",
-        variant: 'outlined',
-        density: 'compact',
-        baseColor: 'white',
-        bgColor: 'secondary',
-        clearable: true,
-    },
     VSelect: {
         variant: 'outlined',
         density: 'compact',
