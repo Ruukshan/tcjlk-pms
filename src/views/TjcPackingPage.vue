@@ -264,7 +264,7 @@ const formData = reactive({
 
 // Validation rules
 const rules = {
-  required: (value) => !!value || "This field is required",
+  required: (value) => !!value || "This field required",
   numeric: (value) => !isNaN(Number(value)) || "Must be a number",
   notFuture: (value) => {
     if (!value) return true;
@@ -285,7 +285,7 @@ const goBack = () => {
 const selectOperator = (operatorNumber) => {
   formData.selectedOperator = operatorNumber;
 };
-
+//Reset form after submit
 const resetForm = () => {
   Object.keys(formData).forEach((key) => {
     if (typeof formData[key] === "boolean") {
