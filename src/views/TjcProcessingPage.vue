@@ -232,6 +232,4 @@ const submitForm = async () => {
 div {
   margin-bottom: 18px;
 }
-
-
 </style>
