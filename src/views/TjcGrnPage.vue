@@ -100,6 +100,25 @@
                     </v-form>
                 </v-card-text>
             </v-card>
+            <!-- Success Dialog -->
+            <AppDialog
+                v-model="successDialog"
+                title="Success!"
+                message="GRN data has been submitted successfully."
+                icon="mdi-check-circle"
+                iconColor="success"
+                @close="handleClose"
+            />
+
+            <!-- Error Dialog -->
+            <AppDialog
+                v-model="errorDialog"
+                title="Error!"
+                :message="errorMessage"
+                icon="mdi-alert-circle"
+                iconColor="error"
+                @close="errorDialog = false"
+            />
         </v-container>
     </v-main>
 </template>
@@ -109,11 +128,15 @@ import Navbar from "../components/Navbar.vue";
 import { ref, computed } from 'vue';
 import { collection, addDoc } from 'firebase/firestore';
 import { db } from '../services/firebase';
+import AppDialog from '../helper/utils/AppDialog.vue';
 
 // Form reference and validation state
 const form = ref(null);
 const valid = ref(false);
 const isSubmitting = ref(false);
+const successDialog = ref(false);
+const errorDialog = ref(false);
+const errorMessage = ref('');
 
 // Form data
 const formData = ref({
@@ -189,36 +212,27 @@ const resetForm = () => {
     };
     form.value.resetValidation();
 }
+// Handle dialog close
+const handleClose = () => {
+    successDialog.value = false;
+    resetForm();
+}
 
-// submit form
+//  Handle Connfirmed submission
 const confirmSubmit = async () => {
-    if (!form.value.validate()) return;
-
     isSubmitting.value = true;
     try {
         await addDoc(collection(db, 'grn'), formData.value);
         console.log('Document written with ID: ');
+        successDialog.value = true;
         resetForm();
     } catch (e) {
-        console.error('Error adding document: ', e);
+        errorMessage.value = 'Error adding document: ${e.message}';
+        errorDialog.value = true;
     } finally {
         isSubmitting.value = false;
     }
 }
 </script>
-
 <style scoped>
-.v-select .v-menu__content {
-  background-color: #2A1F0D !important; /* Custom dropdown background */
-  color: #FFFFFF !important; /* Custom text color */
-}
-
-.v-select .v-select__selection {
-  background-color: #362E17 !important; /* Match text field background */
-  color: #FFFFFF !important; /* Ensure text is visible */
-}
-
-.v-select .v-field__outline {
-  border-color: #2A1F0D !important; /* Match dropdown border */
-}
 </style>
