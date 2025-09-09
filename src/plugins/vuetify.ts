@@ -19,30 +19,36 @@ export default createVuetify({
           secondary: "#362E17",
           button: "#FAC738",
           error: "#ff0000ff",
+          background: "#241F0F", // Add background color for full page
         },
       },
     },
   },
   defaults: {
     VBtn: {
-        rounded: 'lg',
-        color: 'button',
-        variant: 'flat',
+      rounded: "lg",
+      color: "button",
+      variant: "flat",
     },
     VTextField: {
-        variant: 'outlined',
-        density: 'compact',
-        color: 'secondary',
+      variant: "outlined",
+      density: "compact",
+      color: "secondary",
     },
     VCard: {
-        color: 'primary',
+      color: "primary",
     },
     VCardTitle: {
-        style: {
-            'font-size': '12px',
-            'font-weight': 'bold',
-            'font-color': 'white',
-        },
+      style: {
+        "font-size": "12px",
+        "font-weight": "bold",
+        "font-color": "white",
+      },
     },
-  }
+    VMain: {
+      style: {
+        "background-color": "#241F0F",
+      },
+    },
+  },
 });
