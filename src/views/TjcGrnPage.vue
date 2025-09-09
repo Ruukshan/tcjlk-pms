@@ -3,83 +3,94 @@
         <v-container fluid>
             <v-card elevation="0">
                 <Navbar title="GRN "/>
-                <v-divider></v-divider>
                 <v-card-text>
                     <v-form ref="form" v-model="valid">
                         <v-row justify="center">
-                            <v-col cols="12" sm="10" md="8" lg="6" class="mx-auto">
+                            <v-col cols="12">
+                                <v-label>Item</v-label>
                                 <v-text-field 
-                                    label="Item" 
+                                    placeholder="Enter Item"
                                     :rules="itemRules"
                                     v-model="formData.item"
                                 ></v-text-field>
                             </v-col>
-                            <v-col cols="12" sm="10" md="8" lg="6" class="mx-auto">
+                            <v-col cols="12">
+                                <v-label>Supplier</v-label>
                                 <v-select
-                                    label="Supplier"
+                                    placeholder="Select Supplier"
                                     :items="suppliers" 
                                     :rules="supplierRules"
                                     v-model="formData.supplier"
                                 ></v-select>
                             </v-col>
-                            <v-col cols="12" sm="10" md="8" lg="6" class="mx-auto">
+                            <v-col cols="12">
+                                <v-label>Quantity</v-label>
                                 <v-text-field 
-                                    label="Quantity" 
+                                    placeholder="Enter Quantity"
                                     :rules="quantityRules"
                                     v-model="formData.quantity"
                                 ></v-text-field>
                             </v-col>
-                            <v-col cols="12" sm="10" md="8" lg="6" class="mx-auto">
+                            <v-col cols="12" >
+                                <v-label>Quality</v-label>
                                 <v-text-field 
-                                    label="Quality" 
+                                    placeholder="Enter Quality"
                                     :rules="qualityRules"
                                     v-model="formData.quality"
                                 ></v-text-field>
                             </v-col> 
-                            <v-col cols="12" sm="10" md="8" lg="6" class="mx-auto">
+                            <v-col cols="12">
+                                <v-label>Unit</v-label>
                                 <v-text-field 
-                                    label="Unit"
+                                    placeholder="Enter Unit"
                                     :rules="unitRules"
                                     v-model="formData.unit"
                                 ></v-text-field>
                             </v-col>
-                            <v-col cols="12" sm="10" md="8" lg="6" class="mx-auto">
+                            <v-col cols="12">
+                                <v-label>QA Acceptance</v-label>
                                 <v-text-field 
-                                    label="QA Acceptance"
+                                    placeholder="Enter QA Acceptance"
                                     :rules="qaAcceptanceRules"
                                     v-model="formData.qaAcceptance"
                                 ></v-text-field>
                             </v-col>
-                            <v-col cols="12" sm="10" md="8" lg="6" class="mx-auto">
+                            <v-col cols="12">
+                                <v-label>Remarks</v-label>
                                 <v-text-field 
-                                    label="Remarks"
+                                    placeholder="Enter Remarks"
                                     v-model="formData.remarks"
                                 ></v-text-field>
                             </v-col> 
-                            <v-col cols="12" sm="10" md="8" lg="6" class="mx-auto">
+                            <v-col cols="12">
+                                <v-label>Storage Slot</v-label>
                                 <v-text-field 
-                                    label="Storage Slot"
+                                    placeholder="Enter Storage Slot"
                                     :rules="storageSlotRules"
                                     v-model="formData.storageSlot"
                                 ></v-text-field>
                             </v-col>
-                            <v-col cols="12" sm="10" md="8" lg="6" class="mx-auto">
+                            <v-col cols="12">
+                                <v-label>Invoice Ref/GRN</v-label>
                                 <v-text-field 
-                                    label="Invoice Ref/GRN"
+                                    placeholder="Enter Invoice Ref/GRN"
                                     :rules="invoiceRefRules"
                                     v-model="formData.invoiceRef"
                                 ></v-text-field>
                             </v-col>
-                            <v-col cols="12" sm="10" md="8" lg="6" class="mx-auto">
+                            <v-col cols="12">
+                                <v-label>Stock Review Verify Date</v-label>
                                 <v-text-field 
-                                    label="Stock Review Verify Date" 
+                                    placeholder="Select Date" 
                                     type="date"
                                     :rules="stockReviewVerifyDateRules"
                                     v-model="formData.stockReviewVerifyDate"
                                 ></v-text-field>
                             </v-col> 
-                            <v-col cols="12" sm="10" md="8" lg="6" class="mx-auto text-center">
+                            <v-col cols="12">
                                 <v-btn 
+                                    block
+                                    size="large"
                                     :disabled="!valid"
                                     :loading="isSubmitting" 
                                     @click="confirmSubmit"
@@ -197,5 +208,17 @@ const confirmSubmit = async () => {
 </script>
 
 <style scoped>
+.v-select .v-menu__content {
+  background-color: #2A1F0D !important; /* Custom dropdown background */
+  color: #FFFFFF !important; /* Custom text color */
+}
 
+.v-select .v-select__selection {
+  background-color: #362E17 !important; /* Match text field background */
+  color: #FFFFFF !important; /* Ensure text is visible */
+}
+
+.v-select .v-field__outline {
+  border-color: #2A1F0D !important; /* Match dropdown border */
+}
 </style>
