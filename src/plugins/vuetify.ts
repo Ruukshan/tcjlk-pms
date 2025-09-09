@@ -35,12 +35,13 @@ export default createVuetify({
         density: 'compact',
         baseColor: 'background',
         bgColor: 'secondary',
-        clearableIcon: 'mdi-close-circle',
+        clearable: true,
     },
     VSelect: {
         variant: 'outlined',
         density: 'compact',
         color: 'secondary',
+        clearable: true,
     },
     VCardTitle: {
         style: {

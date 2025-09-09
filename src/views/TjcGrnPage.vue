@@ -10,7 +10,6 @@
                         <v-col cols="12" md="6">
                             <v-text-field 
                                 label="Item" 
-                                clearable
                                 :rules="itemRules"
                             ></v-text-field>
                         </v-col>
@@ -18,55 +17,47 @@
                             <v-select
                                 label="Supplier"
                                 :items="suppliers" 
-                                clearable
                                 :rules="supplierRules"
                             ></v-select>
                         </v-col>
                         <v-col cols="12" md="6">
                             <v-text-field 
-                                label="Quantity"
-                                clearable 
+                                label="Quantity" 
                                 :rules="quantityRules"
                             ></v-text-field>
                         </v-col>
                         <v-col cols="12" md="6">
                             <v-text-field 
-                                label="Quality"
-                                clearable 
+                                label="Quality" 
                                 :rules="qualityRules"
                             ></v-text-field>
                         </v-col> 
                         <v-col cols="12" md="6">
                             <v-text-field 
                                 label="Unit"
-                                clearable
                                 :rules="unitRules"
                             ></v-text-field>
                         </v-col>
                         <v-col cols="12" md="6">
                             <v-text-field 
                                 label="QA Acceptance"
-                                clearable
                                 :rules="qaAcceptanceRules"
                             ></v-text-field>
                         </v-col>
                         <v-col cols="12" md="6">
                             <v-text-field 
                                 label="Remarks"
-                                clearable
                             ></v-text-field>
                         </v-col> 
                         <v-col cols="12" md="6">
                             <v-text-field 
                                 label="Storage Slot"
-                                claearable 
                                 :rules="storageSlotRules"
                             ></v-text-field>
                         </v-col>
                         <v-col cols="12" md="6">
                             <v-text-field 
                                 label="Invoice Ref/GRN"
-                                clearable
                                 :rules="invoiceRefRules"
                             ></v-text-field>
                         </v-col>
@@ -74,7 +65,6 @@
                             <v-text-field 
                                 label="Stock Review Verify Date" 
                                 type="date"
-                                clearable
                                 :rules="stockReviewVerifyDateRules"
                             ></v-text-field>
                         </v-col> 
@@ -92,14 +82,16 @@
 import NavBar from "../components/Navbar.vue";
 import { ref } from 'vue';
 
+// 
 const form = ref(null);
 
+// sample select items
 const suppliers = [
     'Supplier 1',
     'Supplier 2',
     'Supplier 3',
 ]
-
+// Validation rules
 const itemRules = [
     v => !!v || 'Item is required',
 ]
