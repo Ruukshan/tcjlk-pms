@@ -19,12 +19,18 @@ export default createVuetify({
           secondary: "#362E17",
           button: "#FAC738",
           error: "#ff0000ff",
-          background: "#FFFFFF",
+          background: "#241F0F"
         },
       },
     },
   },
   defaults: {
+    VContainer: {
+        class: 'bg-primary',
+    },
+    VCard: {
+        color: 'primary',
+    },
     VBtn: {
         rounded: 'lg',
         color: 'button',
@@ -33,7 +39,7 @@ export default createVuetify({
     VTextField: {
         variant: 'outlined',
         density: 'compact',
-        baseColor: 'background',
+        baseColor: 'white',
         bgColor: 'secondary',
         clearable: true,
     },
