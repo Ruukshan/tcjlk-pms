@@ -1,5 +1,5 @@
 <template>
-    <v-main class="bg-primary">
+    <v-main>
         <v-container fluid>
             <v-card elevation="0">
                 <Navbar title="GRN "/>
@@ -7,14 +7,14 @@
                 <v-card-text>
                     <v-form ref="form" v-model="valid">
                         <v-row justify="center">
-                            <v-col cols="12" md="12">
+                            <v-col cols="12" sm="10" md="8" lg="6" class="mx-auto">
                                 <v-text-field 
                                     label="Item" 
                                     :rules="itemRules"
                                     v-model="formData.item"
                                 ></v-text-field>
                             </v-col>
-                            <v-col cols="12" md="12">
+                            <v-col cols="12" sm="10" md="8" lg="6" class="mx-auto">
                                 <v-select
                                     label="Supplier"
                                     :items="suppliers" 
@@ -22,55 +22,55 @@
                                     v-model="formData.supplier"
                                 ></v-select>
                             </v-col>
-                            <v-col cols="12" md="12">
+                            <v-col cols="12" sm="10" md="8" lg="6" class="mx-auto">
                                 <v-text-field 
                                     label="Quantity" 
                                     :rules="quantityRules"
                                     v-model="formData.quantity"
                                 ></v-text-field>
                             </v-col>
-                            <v-col cols="12" md="12">
+                            <v-col cols="12" sm="10" md="8" lg="6" class="mx-auto">
                                 <v-text-field 
                                     label="Quality" 
                                     :rules="qualityRules"
                                     v-model="formData.quality"
                                 ></v-text-field>
                             </v-col> 
-                            <v-col cols="12" md="12">
+                            <v-col cols="12" sm="10" md="8" lg="6" class="mx-auto">
                                 <v-text-field 
                                     label="Unit"
                                     :rules="unitRules"
                                     v-model="formData.unit"
                                 ></v-text-field>
                             </v-col>
-                            <v-col cols="12" md="12">
+                            <v-col cols="12" sm="10" md="8" lg="6" class="mx-auto">
                                 <v-text-field 
                                     label="QA Acceptance"
                                     :rules="qaAcceptanceRules"
                                     v-model="formData.qaAcceptance"
                                 ></v-text-field>
                             </v-col>
-                            <v-col cols="12" md="12">
+                            <v-col cols="12" sm="10" md="8" lg="6" class="mx-auto">
                                 <v-text-field 
                                     label="Remarks"
                                     v-model="formData.remarks"
                                 ></v-text-field>
                             </v-col> 
-                            <v-col cols="12" md="12">
+                            <v-col cols="12" sm="10" md="8" lg="6" class="mx-auto">
                                 <v-text-field 
                                     label="Storage Slot"
                                     :rules="storageSlotRules"
                                     v-model="formData.storageSlot"
                                 ></v-text-field>
                             </v-col>
-                            <v-col cols="12" md="12">
+                            <v-col cols="12" sm="10" md="8" lg="6" class="mx-auto">
                                 <v-text-field 
                                     label="Invoice Ref/GRN"
                                     :rules="invoiceRefRules"
                                     v-model="formData.invoiceRef"
                                 ></v-text-field>
                             </v-col>
-                            <v-col cols="12" md="12">
+                            <v-col cols="12" sm="10" md="8" lg="6" class="mx-auto">
                                 <v-text-field 
                                     label="Stock Review Verify Date" 
                                     type="date"
@@ -78,7 +78,7 @@
                                     v-model="formData.stockReviewVerifyDate"
                                 ></v-text-field>
                             </v-col> 
-                            <v-col cols="12" md="12">
+                            <v-col cols="12" sm="10" md="8" lg="6" class="mx-auto text-center">
                                 <v-btn 
                                     :disabled="!valid"
                                     :loading="isSubmitting" 
@@ -194,9 +194,7 @@ const confirmSubmit = async () => {
         isSubmitting.value = false;
     }
 }
-
 </script>
-
 
 <style scoped>
 
