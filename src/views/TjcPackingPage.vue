@@ -42,7 +42,13 @@
             </div>
 
             <!-- Date Picker Toggle -->
-            <div>
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+              "
+            >
               <v-label>Date Picker</v-label>
               <v-switch v-model="formData.datePicker" />
             </div>
@@ -59,7 +65,13 @@
             </div>
 
             <!-- Checked Switch Toggle -->
-            <div>
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+              "
+            >
               <v-label>Checked Switch</v-label>
               <v-switch v-model="formData.checkedSwitch" />
             </div>
@@ -119,9 +131,6 @@
               <v-row no-gutters class="operator-row">
                 <v-col cols="4" class="pr-1">
                   <v-btn
-                    :variant="
-                      formData.selectedOperator === 1 ? 'flat' : 'outlined'
-                    "
                     :color="
                       formData.selectedOperator === 1 ? 'button' : 'secondary'
                     "
@@ -129,15 +138,13 @@
                     block
                     @click="selectOperator(1)"
                     class="operator-btn"
+                    style="color: white"
                   >
                     Operator 1
                   </v-btn>
                 </v-col>
                 <v-col cols="4" class="px-1">
                   <v-btn
-                    :variant="
-                      formData.selectedOperator === 2 ? 'flat' : 'outlined'
-                    "
                     :color="
                       formData.selectedOperator === 2 ? 'button' : 'secondary'
                     "
@@ -145,15 +152,13 @@
                     block
                     @click="selectOperator(2)"
                     class="operator-btn"
+                    style="color: white"
                   >
                     Operator 2
                   </v-btn>
                 </v-col>
                 <v-col cols="4" class="pl-1">
                   <v-btn
-                    :variant="
-                      formData.selectedOperator === 3 ? 'flat' : 'outlined'
-                    "
                     :color="
                       formData.selectedOperator === 3 ? 'button' : 'secondary'
                     "
@@ -161,6 +166,7 @@
                     block
                     @click="selectOperator(3)"
                     class="operator-btn"
+                    style="color: white"
                   >
                     Operator 3
                   </v-btn>
