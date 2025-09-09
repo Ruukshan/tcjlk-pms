@@ -1,10 +1,10 @@
 <template>
-  <div class="navbar">
-    <button class="back-btn" @click="goBack">
-      ←
-    </button>
-    <h2 class="title">{{ title }}</h2>
-  </div>
+  <v-app-bar app density="compact" color="primary" prominent>
+    <v-btn icon variant="text" @click="goBack">
+      <v-icon color="white">mdi-arrow-left</v-icon>
+    </v-btn>
+    <v-app-bar-title>{{ title }}</v-app-bar-title>
+  </v-app-bar>
 </template>
 
 <script>
@@ -13,14 +13,13 @@ export default {
   props: {
     title: {
       type: String,
-      default: "Material Receipt"
-    }
+      default: "Material Receipt",
+    },
   },
   methods: {
     goBack() {
-      // Go back to previous page
       window.history.back();
-    }
-  }
+    },
+  },
 };
 </script>
