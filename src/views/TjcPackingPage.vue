@@ -343,3 +343,9 @@ const submitForm = async () => {
   }
 };
 </script>
+
+<style scoped>
+div {
+  margin-bottom: 18px;
+}
+</style>
