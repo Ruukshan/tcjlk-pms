@@ -175,20 +175,20 @@
             </div>
 
             <!-- Quality Check -->
-            <div style="
+            <div
+              style="
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
-              ">
+              "
+            >
               <v-label>Quality Check</v-label>
               <v-checkbox
                 v-model="formData.qualityCheck"
                 color="button"
                 hide-details
-                >
-    
-                </v-checkbox>
-              
+              >
+              </v-checkbox>
             </div>
 
             <!-- Submit Button -->
@@ -209,38 +209,24 @@
       </v-card>
 
       <!-- Success Dialog -->
-      <v-dialog v-model="successDialog" max-width="400">
-        <v-card>
-          <v-card-title class="text-center">
-            <v-icon color="success" size="large">mdi-check-circle</v-icon>
-          </v-card-title>
-          <v-card-text class="text-center">
-            <h3>Success!</h3>
-            <p>Packing data has been submitted successfully.</p>
-          </v-card-text>
-          <v-card-actions>
-            <v-btn block color="success" @click="successDialog = false">
-              OK
-            </v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
+      <AppDialog
+        v-model="successDialog"
+        title="Success!"
+        message="Packing data has been submitted successfully."
+        icon="mdi-check-circle"
+        iconColor="success"
+        @close="successDialog = false"
+      />
 
       <!-- Error Dialog -->
-      <v-dialog v-model="errorDialog" max-width="400">
-        <v-card>
-          <v-card-title class="text-center">
-            <v-icon color="error" size="large">mdi-alert-circle</v-icon>
-          </v-card-title>
-          <v-card-text class="text-center">
-            <h3>Error!</h3>
-            <p>{{ errorMessage }}</p>
-          </v-card-text>
-          <v-card-actions>
-            <v-btn block color="error" @click="errorDialog = false"> OK </v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
+      <AppDialog
+        v-model="errorDialog"
+        title="Error!"
+        :message="errorMessage"
+        icon="mdi-alert-circle"
+        iconColor="error"
+        @close="errorDialog = false"
+      />
     </v-container>
   </v-main>
 </template>
@@ -250,6 +236,7 @@ import { ref, reactive } from "vue";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { app, db } from "@/services/firebase.js";
 import Navbar from "@/components/Navbar.vue";
+import AppDialog from "@/helper/utils/AppDialog.vue";
 
 // Form validation
 const valid = ref(false);
