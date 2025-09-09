@@ -1,13 +1,11 @@
 <script setup>
-
-import TjcPackingPage from './views/TjcPackingPage.vue'
+import TjcPackingPage from "./views/TjcPackingPage.vue";
 </script>
 
 <template>
-
-  <TjcPackingPage />
+  <v-app>
+    <TjcPackingPage />
+  </v-app>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

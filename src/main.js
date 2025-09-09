@@ -5,4 +5,3 @@ import vuetify from "./plugins/vuetify";
 const app = createApp(App);
 app.use(vuetify);
 app.mount("#app");
-import firebase from "@/services/firebase.js";

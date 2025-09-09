@@ -1,152 +1,125 @@
 <template>
-  <v-container fluid class="packing-container">
-    <v-card class="packing-card" elevation="0">
+  <v-container fluid>
+    <v-card elevation="0">
       <!-- Header -->
-      <v-app-bar
-        density="compact"
-        class="packing-header"
-        color="primary"
-        prominent
-      >
+      <v-app-bar density="compact" color="primary" prominent>
         <v-btn icon variant="text" @click="goBack">
           <v-icon color="white">mdi-arrow-left</v-icon>
         </v-btn>
-        <v-app-bar-title class="header-title">Packing</v-app-bar-title>
+        <v-app-bar-title>Packing</v-app-bar-title>
       </v-app-bar>
 
-      <v-card-text class="packing-form">
+      <v-card-text>
         <v-form ref="packingForm" v-model="valid" lazy-validation>
           <!-- Retorted Batch Code -->
-          <div class="form-section">
-            <v-label class="field-label">Retorted Batch Code</v-label>
+          <div>
+            <v-label>Retorted Batch Code</v-label>
             <v-text-field
               v-model="formData.retortedBatchCode"
               placeholder="Enter code"
               :rules="[rules.required]"
               hide-details="auto"
-              class="custom-field"
             />
           </div>
 
           <!-- Retort Date -->
-          <div class="form-section">
-            <v-label class="field-label">Retort Date</v-label>
+          <div>
+            <v-label>Retort Date</v-label>
             <v-text-field
               v-model="formData.retortDate"
               type="date"
               placeholder="Select date"
               :rules="[rules.required]"
               hide-details="auto"
-              class="custom-field"
             />
           </div>
 
           <!-- TJC Batch Code -->
-          <div class="form-section">
-            <v-label class="field-label">TJC Batch Code</v-label>
+          <div>
+            <v-label>TJC Batch Code</v-label>
             <v-text-field
               v-model="formData.tjcBatchCode"
               placeholder="Enter code"
               :rules="[rules.required]"
               hide-details="auto"
-              class="custom-field"
             />
           </div>
 
           <!-- Date Picker Toggle -->
-          <div class="form-section">
-            <div class="toggle-section">
-              <v-label class="field-label">Date Picker</v-label>
-              <v-switch
-                v-model="formData.datePicker"
-                color="button"
-                hide-details
-                inset
-              />
-            </div>
+          <div>
+            <v-label>Date Picker</v-label>
+            <v-switch v-model="formData.datePicker" />
           </div>
 
           <!-- Order Batch Code -->
-          <div class="form-section">
-            <v-label class="field-label">Order Batch Code</v-label>
+          <div>
+            <v-label>Order Batch Code</v-label>
             <v-text-field
               v-model="formData.orderBatchCode"
               placeholder="Enter code"
               :rules="[rules.required]"
               hide-details="auto"
-              class="custom-field"
             />
           </div>
 
           <!-- Checked Switch Toggle -->
-          <div class="form-section">
-            <div class="toggle-section">
-              <v-label class="field-label">Checked Switch</v-label>
-              <v-switch
-                v-model="formData.checkedSwitch"
-                color="button"
-                hide-details
-                inset
-              />
-            </div>
+          <div>
+            <v-label>Checked Switch</v-label>
+            <v-switch v-model="formData.checkedSwitch" />
           </div>
 
           <!-- Batch Quantity -->
-          <div class="form-section">
-            <v-label class="field-label">Batch Quantity</v-label>
+          <div>
+            <v-label>Batch Quantity</v-label>
             <v-text-field
               v-model="formData.batchQuantity"
               placeholder="Enter quantity"
               type="number"
               :rules="[rules.required, rules.numeric]"
               hide-details="auto"
-              class="custom-field"
             />
           </div>
 
           <!-- Production and Reject Count Row -->
-          <div class="form-section">
+          <div>
             <v-row no-gutters>
               <v-col cols="6" class="pr-2">
-                <v-label class="field-label">Today's Production</v-label>
+                <v-label>Today's Production</v-label>
                 <v-text-field
                   v-model="formData.todaysProduction"
                   placeholder="Enter production"
                   type="number"
                   :rules="[rules.required, rules.numeric]"
                   hide-details="auto"
-                  class="custom-field"
                 />
               </v-col>
               <v-col cols="6" class="pl-2">
-                <v-label class="field-label">Reject Count</v-label>
+                <v-label>Reject Count</v-label>
                 <v-text-field
                   v-model="formData.rejectCount"
                   placeholder="Enter count"
                   type="number"
                   :rules="[rules.required, rules.numeric]"
                   hide-details="auto"
-                  class="custom-field"
                 />
               </v-col>
             </v-row>
           </div>
 
           <!-- Label Conformation Details -->
-          <div class="form-section">
-            <v-label class="field-label">Label Conformation Details</v-label>
+          <div>
+            <v-label>Label Conformation Details</v-label>
             <v-text-field
               v-model="formData.labelConformationDetails"
               placeholder="Enter details"
               :rules="[rules.required]"
               hide-details="auto"
-              class="custom-field"
             />
           </div>
 
           <!-- Operator Buttons -->
-          <div class="form-section">
-            <v-label class="field-label">Select Operator</v-label>
+          <div>
+            <v-label>Select Operator</v-label>
             <v-row no-gutters class="operator-row">
               <v-col cols="4" class="pr-1">
                 <v-btn
@@ -200,7 +173,7 @@
           </div>
 
           <!-- Quality Check -->
-          <div class="form-section">
+          <div>
             <div class="quality-check-section">
               <v-checkbox
                 v-model="formData.qualityCheck"
@@ -215,7 +188,7 @@
           </div>
 
           <!-- Submit Button -->
-          <div class="form-section submit-section">
+          <div>
             <v-btn
               block
               size="large"
@@ -366,178 +339,3 @@ const submitForm = async () => {
   }
 };
 </script>
-
-<style scoped>
-.packing-container {
-  background-color: #241f0f;
-  min-height: 100vh;
-  padding: 0;
-}
-
-.packing-card {
-  background-color: #241f0f !important;
-  border-radius: 0;
-  height: 100vh;
-}
-
-.packing-header {
-  background-color: #241f0f !important;
-  border-bottom: 1px solid #362e17;
-}
-
-.header-title {
-  color: white !important;
-  font-weight: bold;
-  font-size: 18px;
-}
-
-.packing-form {
-  padding: 16px;
-  background-color: #241f0f;
-}
-
-.form-section {
-  margin-bottom: 20px;
-}
-
-.field-label {
-  color: white !important;
-  font-size: 14px;
-  font-weight: 500;
-  margin-bottom: 8px;
-  display: block;
-}
-
-.custom-field :deep(.v-field) {
-  background-color: #362e17 !important;
-  border-radius: 8px;
-}
-
-.custom-field :deep(.v-field__input) {
-  color: white !important;
-  padding: 12px 16px;
-}
-
-.custom-field :deep(.v-field__outline) {
-  border-color: #4a4a4a !important;
-}
-
-.custom-field :deep(.v-field--focused .v-field__outline) {
-  border-color: #fac738 !important;
-}
-
-.custom-field :deep(::placeholder) {
-  color: #888 !important;
-  opacity: 1;
-}
-
-.toggle-section {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 8px 0;
-}
-
-.operator-row {
-  margin-top: 8px;
-}
-
-.operator-btn {
-  font-size: 12px;
-  text-transform: none;
-  height: 36px;
-}
-
-.quality-check-section {
-  display: flex;
-  align-items: center;
-  padding: 8px 0;
-}
-
-.quality-check-section :deep(.v-selection-control) {
-  align-items: center;
-}
-
-.quality-check-section :deep(.v-label) {
-  color: white !important;
-  font-size: 14px;
-}
-
-.submit-section {
-  margin-top: 32px;
-  margin-bottom: 16px;
-}
-
-.submit-btn {
-  background-color: #fac738 !important;
-  color: #241f0f !important;
-  font-weight: bold;
-  font-size: 16px;
-  height: 48px;
-  text-transform: none;
-}
-
-.submit-btn:hover {
-  background-color: #e5b332 !important;
-}
-
-/* Switch styling */
-:deep(.v-switch .v-selection-control__wrapper) {
-  height: 24px;
-}
-
-:deep(.v-switch .v-switch__thumb) {
-  background-color: white;
-}
-
-:deep(.v-switch--inset .v-selection-control__input) {
-  background-color: #4a4a4a;
-}
-
-:deep(.v-switch--inset.v-switch--indeterminate .v-selection-control__input),
-:deep(.v-switch--inset .v-switch__track) {
-  background-color: #fac738;
-}
-
-/* Checkbox styling */
-:deep(.v-checkbox .v-selection-control__input) {
-  border-color: #4a4a4a;
-}
-
-:deep(.v-checkbox--checked .v-selection-control__input) {
-  background-color: #fac738;
-  border-color: #fac738;
-}
-
-/* Date input styling */
-.custom-field :deep(input[type="date"]) {
-  color: white !important;
-}
-
-.custom-field :deep(input[type="date"]::-webkit-calendar-picker-indicator) {
-  filter: invert(1);
-  cursor: pointer;
-}
-
-/* Number input styling */
-.custom-field :deep(input[type="number"]) {
-  color: white !important;
-}
-
-/* Dialog styling */
-:deep(.v-dialog .v-card) {
-  background-color: white;
-}
-
-:deep(.v-dialog .v-card-title) {
-  padding: 24px 24px 8px;
-}
-
-:deep(.v-dialog .v-card-text) {
-  padding: 8px 24px;
-}
-
-:deep(.v-dialog .v-card-actions) {
-  padding: 16px 24px 24px;
-}
-</style>
