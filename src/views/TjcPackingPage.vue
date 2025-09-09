@@ -25,7 +25,8 @@
                 v-model="formData.retortDate"
                 type="date"
                 placeholder="Select date"
-                :rules="[rules.required]"
+                :rules="[rules.required, rules.notFuture]"
+                :max="new Date().toISOString().split('T')[0]"
                 hide-details="auto"
               />
             </div>
@@ -266,6 +267,13 @@ const formData = reactive({
 const rules = {
   required: (value) => !!value || "This field is required",
   numeric: (value) => !isNaN(Number(value)) || "Must be a number",
+  notFuture: (value) => {
+    if (!value) return true;
+    const selected = new Date(value);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    return selected <= today || "Date cannot be in the future";
+  },
 };
 
 // Methods
