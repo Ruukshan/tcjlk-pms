@@ -11,7 +11,8 @@
             <v-col cols="12" md="6">
               <v-text-field
                   label="MR Code"
-                  :rules="mrCodeRules"
+                  v-model="receipt.mrCode"
+                  :rules="[rules.required]"
               ></v-text-field>
             </v-col>
 
@@ -19,14 +20,16 @@
               <v-select
                   label="Item"
                   :items="items"
-                  :rules="itemRules"
+                  v-model="receipt.item"
+                  :rules="[rules.required]"
               ></v-select>
             </v-col>
 
             <v-col cols="12" md="6">
               <v-text-field
                   label="Quantity"
-                  :rules="quantityRules"
+                  v-model="receipt.quantity"
+                  :rules="[rules.required, rules.number]"
                   type="number"
               ></v-text-field>
             </v-col>
@@ -34,20 +37,23 @@
             <v-col cols="12" md="6">
               <v-text-field
                   label="Quality"
-                  :rules="qualityRules"
+                  v-model="receipt.quality"
+                  :rules="[rules.required]"
               ></v-text-field>
             </v-col>
 
             <v-col cols="12" md="6">
               <v-text-field
                   label="For Final Product"
-                  :rules="finalProductRules"
+                  v-model="receipt.finalProduct"
+                  :rules="[rules.required]"
               ></v-text-field>
             </v-col>
 
             <v-col cols="12" md="6">
               <v-textarea
                   label="Remarks"
+                  v-model="receipt.remarks"
                   auto-grow
                   rows="2"
               ></v-textarea>
@@ -56,14 +62,16 @@
             <v-col cols="12" md="6">
               <v-text-field
                   label="Storage Slot"
-                  :rules="storageSlotRules"
+                  v-model="receipt.storageSlot"
+                  :rules="[rules.required]"
               ></v-text-field>
             </v-col>
 
             <v-col cols="12" md="6">
               <v-text-field
                   label="Unit Weight"
-                  :rules="unitWeightRules"
+                  v-model="receipt.unitWeight"
+                  :rules="[rules.required, rules.number]"
                   type="number"
               ></v-text-field>
             </v-col>
@@ -81,25 +89,59 @@
 <script setup>
 import NavBar from "../components/Navbar.vue";
 import { ref } from "vue";
+import { collection, addDoc } from "firebase/firestore";
+import { db } from "../services/firebase";
 
 const form = ref(null);
 
-// Dropdown options
+
+const receipt = ref({
+  mrCode: "",
+  item: "",
+  quantity: "",
+  quality: "",
+  finalProduct: "",
+  remarks: "",
+  storageSlot: "",
+  unitWeight: ""
+});
+
+
 const items = ["Item 1", "Item 2", "Item 3"];
 
-// Validation rules
-const mrCodeRules = [v => !!v || "MR Code is required"];
-const itemRules = [v => !!v || "Item is required"];
-const quantityRules = [v => !!v || "Quantity is required"];
-const qualityRules = [v => !!v || "Quality is required"];
-const finalProductRules = [v => !!v || "Final Product is required"];
-const storageSlotRules = [v => !!v || "Storage Slot is required"];
-const unitWeightRules = [v => !!v || "Unit Weight is required"];
 
-const submit = () => {
-  if (form.value.validate()) {
-    console.log("Form submitted");
+const rules = {
+  required: v => !!v || "This field is required",
+  number: v => (!isNaN(v) && v > 0) || "Must be a valid number"
+};
 
+
+// Submit function
+const submit = async () => {
+
+  const isValid = form.value.validate();
+
+  if (!isValid) return;
+
+  try {
+    await addDoc(collection(db, "materialReceipts"), {
+      ...receipt.value,
+      quantity: Number(receipt.value.quantity),
+      unitWeight: Number(receipt.value.unitWeight),
+      createdAt: new Date()
+    });
+
+    alert("Material receipt saved successfully!");
+
+
+    Object.keys(receipt.value).forEach(key => (receipt.value[key] = ""));
+
+    form.value.resetValidation();
+
+  } catch (error) {
+    console.error("Error adding document: ", error);
+    alert("Error saving data");
   }
 };
+
 </script>
