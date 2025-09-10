@@ -1,101 +1,115 @@
 <template>
-  <v-container>
-    <v-card color="primary" class="pa-4">
-      <v-card-title>
-        <NavBar title="Material Receipt" />
-      </v-card-title>
-
+  <v-container class="pa-4" fluid>
+    <v-card class="pa-4">
+      <Navbar title="Quality Control 2" />
       <v-card-text>
-        <v-form ref="form">
-          <v-row justify="center">
-            <v-col cols="12" md="6">
+        <v-form ref="form" class="pb-10">
+          <v-row>
+            <v-col cols="12">
               <v-text-field
-                  label="MR Code"
                   v-model="receipt.mrCode"
+                  label="MR Code"
                   :rules="[rules.required]"
-              ></v-text-field>
+              />
             </v-col>
 
-            <v-col cols="12" md="6">
+            <v-col cols="12">
               <v-select
-                  label="Item"
-                  :items="items"
                   v-model="receipt.item"
+                  :items="items"
+                  label="Item"
                   :rules="[rules.required]"
-              ></v-select>
+              />
             </v-col>
 
-            <v-col cols="12" md="6">
+            <v-col cols="12">
               <v-text-field
-                  label="Quantity"
                   v-model="receipt.quantity"
-                  :rules="[rules.required, rules.number]"
+                  label="Quantity"
                   type="number"
-              ></v-text-field>
+                  :rules="[rules.required, rules.number]"
+              />
             </v-col>
 
-            <v-col cols="12" md="6">
+            <v-col cols="12">
               <v-text-field
-                  label="Quality"
                   v-model="receipt.quality"
+                  label="Quality"
                   :rules="[rules.required]"
-              ></v-text-field>
+              />
             </v-col>
 
-            <v-col cols="12" md="6">
+            <v-col cols="12">
               <v-text-field
-                  label="For Final Product"
                   v-model="receipt.finalProduct"
+                  label="For Final Product"
                   :rules="[rules.required]"
-              ></v-text-field>
+              />
             </v-col>
 
-            <v-col cols="12" md="6">
+            <v-col cols="12">
               <v-textarea
-                  label="Remarks"
                   v-model="receipt.remarks"
+                  label="Remarks"
                   auto-grow
                   rows="2"
-              ></v-textarea>
+              />
             </v-col>
 
-            <v-col cols="12" md="6">
+            <v-col cols="12">
               <v-text-field
-                  label="Storage Slot"
                   v-model="receipt.storageSlot"
+                  label="Storage Slot"
                   :rules="[rules.required]"
-              ></v-text-field>
+              />
             </v-col>
 
-            <v-col cols="12" md="6">
+            <v-col cols="12">
               <v-text-field
-                  label="Unit Weight"
                   v-model="receipt.unitWeight"
-                  :rules="[rules.required, rules.number]"
+                  label="Unit Weight"
                   type="number"
-              ></v-text-field>
+                  :rules="[rules.required, rules.number]"
+              />
             </v-col>
 
-            <v-col cols="12" md="6">
-              <v-btn block @click="submit">Production Received</v-btn>
+            <v-col cols="12">
+              <v-btn block size="large" @click="submit" :loading="loading">
+                Production Received
+              </v-btn>
             </v-col>
           </v-row>
         </v-form>
       </v-card-text>
     </v-card>
+
+    <DialogBox
+        v-model="dialog"
+        :title="dialogTitle"
+        :message="dialogMessage"
+        :icon="dialogIcon"
+        :icon-color="dialogColor"
+        @close="dialog = false"
+    />
   </v-container>
 </template>
 
 <script setup>
-import NavBar from "../components/Navbar.vue";
-import { ref } from "vue";
+import { ref, reactive } from "vue";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../services/firebase";
+import Navbar from "@/components/Navbar.vue";
+import DialogBox from "@/helper/utils/AppDialog.vue";
 
 const form = ref(null);
+const loading = ref(false);
+const dialog = ref(false);
+const dialogTitle = ref("");
+const dialogMessage = ref("");
+const dialogIcon = ref("mdi-information");
+const dialogColor = ref("primary");
 
-
-const receipt = ref({
+const receipt = reactive({
   mrCode: "",
   item: "",
   quantity: "",
@@ -106,42 +120,47 @@ const receipt = ref({
   unitWeight: ""
 });
 
-
 const items = ["Item 1", "Item 2", "Item 3"];
-
 
 const rules = {
   required: v => !!v || "This field is required",
   number: v => (!isNaN(v) && v > 0) || "Must be a valid number"
 };
 
-
-// Submit function
 const submit = async () => {
+  loading.value = true;
 
   const isValid = form.value.validate();
-
-  if (!isValid) return;
+  if (!isValid) {
+    loading.value = false;
+    return;
+  }
 
   try {
     await addDoc(collection(db, "materialReceipts"), {
-      ...receipt.value,
-      quantity: Number(receipt.value.quantity),
-      unitWeight: Number(receipt.value.unitWeight),
+      ...receipt,
+      quantity: Number(receipt.quantity),
+      unitWeight: Number(receipt.unitWeight),
       createdAt: new Date()
     });
 
-    alert("Material receipt saved successfully!");
+    dialogTitle.value = "Success";
+    dialogMessage.value = "Quality Control record saved successfully!";
+    dialogIcon.value = "mdi-check-circle";
+    dialogColor.value = "green";
+    dialog.value = true;
 
-
-    Object.keys(receipt.value).forEach(key => (receipt.value[key] = ""));
-
-    form.value.resetValidation();
-
+    form.value.reset();
   } catch (error) {
-    console.error("Error adding document: ", error);
-    alert("Error saving data");
+    console.error("Error saving data: ", error);
+
+    dialogTitle.value = "Error";
+    dialogMessage.value = "There was a problem saving the data.";
+    dialogIcon.value = "mdi-alert-circle";
+    dialogColor.value = "red";
+    dialog.value = true;
+  } finally {
+    loading.value = false;
   }
 };
-
 </script>
