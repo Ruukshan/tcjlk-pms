@@ -60,6 +60,7 @@ export default createVuetify({
         "font-weight": "bold",
         "font-color": "white",
       },
+    },
 
     VSelect: {
       variant: 'outlined',
