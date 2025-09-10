@@ -19,16 +19,23 @@ export default createVuetify({
           secondary: "#362E17",
           button: "#FAC738",
           error: "#ff0000ff",
-          background: "#241F0F", // Add background color for full page
+          background: "#241F0F",
+          selectDropdown: "#2A1F0D",
+          selectText: "#6B592E",
+          labelText: "#FFFFFF",
         },
       },
     },
   },
   defaults: {
+
     VBtn: {
-      rounded: "lg",
-      color: "button",
-      variant: "flat",
+      rounded: 'lg',
+      color: 'button',
+      variant: 'flat',
+    },
+    VLabel: {
+      labelColor: "labelText",
     },
     VTextField: {
       variant: "outlined",
@@ -46,27 +53,24 @@ export default createVuetify({
       bgColor: "secondary",
       clearable: true,
     },
-    VSelect: {
-      variant: "outlined",
-      density: "compact",
-      color: "secondary",
-      clearable: true,
-    },
+   
     VCardTitle: {
       style: {
         "font-size": "12px",
         "font-weight": "bold",
         "font-color": "white",
       },
+
+    VSelect: {
+      variant: 'outlined',
+      density: 'compact',
+      color: 'selectText',
+      bgColor: 'secondary',
+      clearable: true,
     },
     VMain: {
       style: {
         "background-color": "#241F0F",
-      },
-    },
-    VLabel: {
-      style: {
-        color: "#fff", // label color
       },
     },
   },
