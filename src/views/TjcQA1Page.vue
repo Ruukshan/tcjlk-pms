@@ -10,7 +10,7 @@
                                 <v-label>MR Issue Approval</v-label>
                                 <v-text-field
                                     placeholder="Enter approval status"
-                                    v-model="approvalStatus"
+                                    v-model="formData.approvalStatus"
                                     :rules="approvalStatusRules"
                                 ></v-text-field>
                             </v-col>
@@ -18,7 +18,7 @@
                                 <v-label>General Ceanliness Production Area</v-label>
                                 <v-text-field
                                     placeholder="Enter cleanliness status"
-                                    v-model="cleanlinessProduciton"
+                                    v-model="formData.cleanlinessProduciton"
                                     :rules="cleanlinessProducitonRules"
                                 ></v-text-field>
                             </v-col>
@@ -26,7 +26,7 @@
                                 <v-label>Hygine Random</v-label>
                                 <v-text-field
                                     placeholder="Enter hygine status"
-                                    v-model="hygineStatus"
+                                    v-model="formData.hygineStatus"
                                     :rules="hygineStatusRules"
                                 ></v-text-field>
                             </v-col>
@@ -34,7 +34,7 @@
                                 <v-label>Exhaust Temprature</v-label>
                                 <v-text-field
                                     placeholder="Enter tempreture"
-                                    v-model="exhaustTemprature"
+                                    v-model="formData.exhaustTemprature"
                                     :rules="exhaustTempratureRules"
                                 ></v-text-field>
                             </v-col>
@@ -42,7 +42,7 @@
                                 <v-label>Seaming Body Length</v-label>
                                 <v-text-field
                                     placeholder="Enter body length"
-                                    v-model="bodyLength"
+                                    v-model="formData.bodyLength"
                                     :rules="bodyLengthRules"
                                 ></v-text-field>
                             </v-col>
@@ -50,7 +50,7 @@
                                 <v-label>Seaming Hook Length</v-label>
                                 <v-text-field
                                     placeholder="Enter hook lenght"
-                                    v-model="hookLength"
+                                    v-model="formData.hookLength"
                                     :rules="hookLengthRules"
                                 ></v-text-field>
                             </v-col>
@@ -58,7 +58,7 @@
                                 <v-label>Overlap</v-label>
                                 <v-text-field
                                     placeholder="Enter overlap percentage"
-                                    v-model="overlapPercentage"
+                                    v-model="formData.overlapPercentage"
                                     :rules="overlapPercentageRules"
                                 ></v-text-field>
                             </v-col>
@@ -66,7 +66,7 @@
                                 <v-label>Seamer Condition</v-label>
                                 <v-select
                                     placeholder="Select condition"
-                                    v-model="seamerCondition"
+                                    v-model="formData.seamerCondition"
                                     :items="conditions"
                                     :rules="seamerConditionRules"
                                 ></v-select>
@@ -87,6 +87,25 @@
                     </v-form>
                 </v-card-text>
             </v-card>
+            <!-- Success Dialog -->
+            <AppDialog
+                v-model="successDialog"
+                title="Success!"
+                message="QA1 data has been submitted successfully."
+                icon="mdi-check-circle"
+                iconColor="success"
+                @close="handleClose"
+            />
+
+            <!-- Error Dialog -->
+            <AppDialog
+                v-model="errorDialog"
+                title="Error!"
+                :message="errorMessage"
+                icon="mdi-alert-circle"
+                iconColor="error"
+                @close="errorDialog = false"
+            />
         </v-container>
     </v-main>
 </template>
@@ -94,10 +113,17 @@
 <script setup>
 import Navbar from '../components/Navbar.vue';
 import { ref } from 'vue';
+import { collection, addDoc } from "firebase/firestore";
+import { db } from '../services/firebase';
+import AppDialog from '../helper/utils/AppDialog.vue';
 
 
 const form = ref(null);
 const valid = ref(false);
+const isSubmitting = ref(false);
+const successDialog = ref(false);
+const errorDialog = ref(false);
+const errorMessage = ref('');
 
 // Form data
 const formData = ref({
@@ -126,6 +152,7 @@ const hygineStatusRules = [
 ];
 const exhaustTempratureRules = [
     v => !!v || 'Exhaust temprature is required',
+    v => (v && /[CF]$/.test(v)) || 'Exhaust temprature must end with C or F',
 ];
 const bodyLengthRules = [
     v => !!v || 'Body length is required',
@@ -135,11 +162,49 @@ const hookLengthRules = [
 ];
 const overlapPercentageRules = [
     v => !!v || 'Overlap percentage is required',
+    v=> (v && /^[0-9]+(\.[0-9]+)?%$/.test(v)) || 'Overlap percentage must be a number followed by %',
 ];
 const seamerConditionRules = [
     v => !!v || 'Seamer condition is required',
 ];
 
+// reset form data
+const resetForm = () => {
+    formData.value = {
+        approvalStatus: '',
+        cleanlinessProduciton: '',
+        hygineStatus: '',
+        exhaustTemprature: '',
+        bodyLength: '',
+        hookLength: '',
+        overlapPercentage: '',
+        seamerCondition: '',
+    };
+    form.value.resetValidation();
+};
+
+// Handle dialog close
+const handleClose = () => {
+    successDialog.value = false;
+    resetForm();
+}
+
+// Submit document
+const submit = async () => {
+    isSubmitting.value = true;
+    try {
+        await addDoc(collection(db, "QA1"), formData.value);
+        console.log("Document written with ID: ");
+        successDialog.value=true;
+        resetForm();
+    } catch (error) {
+        console.error("Error adding document: ${e.message}");
+        errorMessage.value = "An error occurred while submitting the form. Please try again.";
+        errorDialog.value = true;
+    } finally {
+        isSubmitting.value = false;
+    }
+};
 
 </script>
 
