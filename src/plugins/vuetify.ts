@@ -28,14 +28,15 @@ export default createVuetify({
     },
   },
   defaults: {
-
     VBtn: {
-      rounded: 'lg',
-      color: 'button',
-      variant: 'flat',
+      rounded: "lg",
+      color: "button",
+      variant: "flat",
     },
     VLabel: {
-      labelColor: "labelText",
+      style: {
+        color: "#fff", // label color
+      },
     },
     VTextField: {
       variant: "outlined",
@@ -53,7 +54,7 @@ export default createVuetify({
       bgColor: "secondary",
       clearable: true,
     },
-   
+
     VCardTitle: {
       style: {
         "font-size": "12px",
@@ -63,10 +64,10 @@ export default createVuetify({
     },
 
     VSelect: {
-      variant: 'outlined',
-      density: 'compact',
-      color: 'selectText',
-      bgColor: 'secondary',
+      variant: "outlined",
+      density: "compact",
+      color: "selectText",
+      bgColor: "secondary",
       clearable: true,
     },
     VMain: {
