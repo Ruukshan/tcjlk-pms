@@ -70,6 +70,16 @@ export default createVuetify({
       bgColor: "secondary",
       clearable: true,
     },
+
+    VTextarea: {
+      variant: "outlined",
+      density: "compact",
+      color: "secondary",
+      style: {
+        color: "#fff",
+      },
+    },
+
     VMain: {
       style: {
         "background-color": "#241F0F",
