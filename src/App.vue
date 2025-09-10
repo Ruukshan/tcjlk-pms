@@ -1,6 +1,10 @@
 <template>
   <v-app>
-   <TjcMrPage></TjcMrPage>
+    <TjcProcessingPage />
+    <TjcMrPage />
+    <TjcPackingPage />
+    <TjcGrnPage />
+    <TjcQA1Page />
   </v-app>
 </template>
 
@@ -10,7 +14,6 @@ import TjcProcessingPage from "./views/TjcProcessingPage.vue";
 import TjcMrPage from "./views/TjcMrPage.vue";
 import TjcGrnPage from "./views/TjcGrnPage.vue";
 import TjcPackingPage from "./views/TjcPackingPage.vue";
-import TjcQa2 from "@/views/TjcQa2.vue";
 </script>
 
 <style scoped>
