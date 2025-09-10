@@ -129,6 +129,10 @@ import { ref, computed } from 'vue';
 import { collection, addDoc } from 'firebase/firestore';
 import { db } from '../services/firebase';
 import AppDialog from '../helper/utils/AppDialog.vue';
+import { useRouter } from 'vue-router';
+
+
+const router = useRouter();
 
 // Form reference and validation state
 const form = ref(null);
@@ -216,6 +220,7 @@ const resetForm = () => {
 const handleClose = () => {
     successDialog.value = false;
     resetForm();
+    router.push({ name: 'MRPage' }); 
 }
 
 //  Handle Connfirmed submission
