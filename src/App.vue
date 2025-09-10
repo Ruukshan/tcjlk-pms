@@ -3,7 +3,7 @@
     <TjcProcessingPage />
     <TjcMrPage />
     <TjcPackingPage />
-    <TjcGrnPage /> 
+    <TjcGrnPage />
     <TjcQA1Page />
   </v-app>
 </template>
@@ -18,4 +18,3 @@ import TjcGrnPage from "./views/TjcGrnPage.vue";
 
 <style scoped>
 </style>
-
