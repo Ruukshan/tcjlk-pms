@@ -2,10 +2,8 @@
   <v-container class="pa-4" fluid>
     <v-card class="pa-4">
       <Navbar title="Quality Control 2" />
-      <v-spacer></v-spacer>
-
       <v-card-text>
-        <v-form ref="form">
+        <v-form ref="form" class="pb-10">
           <v-row>
             <v-col cols="12">
               <v-text-field
@@ -76,7 +74,7 @@
             </v-col>
 
             <v-col cols="12">
-              <v-btn block size="large" @click="submit">
+              <v-btn block size="large" @click="submit" :loading="loading">
                 Production Received
               </v-btn>
             </v-col>
@@ -84,19 +82,34 @@
         </v-form>
       </v-card-text>
     </v-card>
+
+    <DialogBox
+        v-model="dialog"
+        :title="dialogTitle"
+        :message="dialogMessage"
+        :icon="dialogIcon"
+        :icon-color="dialogColor"
+        @close="dialog = false"
+    />
   </v-container>
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, reactive } from "vue";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../services/firebase";
 import Navbar from "@/components/Navbar.vue";
-import DialogBox from "@/helper/utils/AppDialog.vue"
+import DialogBox from "@/helper/utils/AppDialog.vue";
 
 const form = ref(null);
+const loading = ref(false);
+const dialog = ref(false);
+const dialogTitle = ref("");
+const dialogMessage = ref("");
+const dialogIcon = ref("mdi-information");
+const dialogColor = ref("primary");
 
-const receipt = ref({
+const receipt = reactive({
   mrCode: "",
   item: "",
   quantity: "",
@@ -115,33 +128,39 @@ const rules = {
 };
 
 const submit = async () => {
-  const { valid } = await form.value.validate();
-  if (!valid) return;
+  loading.value = true;
+
+  const isValid = form.value.validate();
+  if (!isValid) {
+    loading.value = false;
+    return;
+  }
 
   try {
     await addDoc(collection(db, "materialReceipts"), {
-      ...receipt.value,
-      quantity: Number(receipt.value.quantity),
-      unitWeight: Number(receipt.value.unitWeight),
+      ...receipt,
+      quantity: Number(receipt.quantity),
+      unitWeight: Number(receipt.unitWeight),
       createdAt: new Date()
     });
 
-    alert("Material receipt saved successfully!");
+    dialogTitle.value = "Success";
+    dialogMessage.value = "Quality Control record saved successfully!";
+    dialogIcon.value = "mdi-check-circle";
+    dialogColor.value = "green";
+    dialog.value = true;
 
-    receipt.value = {
-      mrCode: "",
-      item: "",
-      quantity: "",
-      quality: "",
-      finalProduct: "",
-      remarks: "",
-      storageSlot: "",
-      unitWeight: ""
-    };
-    form.value.resetValidation();
+    form.value.reset();
   } catch (error) {
     console.error("Error saving data: ", error);
-    alert("Error saving data");
+
+    dialogTitle.value = "Error";
+    dialogMessage.value = "There was a problem saving the data.";
+    dialogIcon.value = "mdi-alert-circle";
+    dialogColor.value = "red";
+    dialog.value = true;
+  } finally {
+    loading.value = false;
   }
 };
 </script>

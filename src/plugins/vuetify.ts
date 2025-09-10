@@ -1,6 +1,6 @@
 // Styles
 import "vuetify/styles";
-import "@mdi/font/css/materialdesignicons.css"
+import "@mdi/font/css/materialdesignicons.css";
 
 // Vuetify
 import { createVuetify } from "vuetify";
@@ -19,40 +19,56 @@ export default createVuetify({
           secondary: "#362E17",
           button: "#FAC738",
           error: "#ff0000ff",
-          background: "#241F0F", // Add background color for full page
+          background: "#241F0F",
+          selectDropdown: "#2A1F0D",
+          selectText: "#6B592E",
+          labelText: "#FFFFFF",
         },
       },
     },
   },
   defaults: {
-    VContainer: {
-        class: 'bg-primary',
-    },
-    VCard: {
-        color: 'primary',
-    },
     VBtn: {
       rounded: "lg",
       color: "button",
       variant: "flat",
     },
+    VLabel: {
+      style: {
+        color: "#fff", // label color
+      },
+    },
     VTextField: {
       variant: "outlined",
       density: "compact",
       color: "secondary",
+      style: {
+        color: "#fff", // text color inside input
+      },
     },
-    VSelect: {
-        variant: 'outlined',
-        density: 'compact',
-        color: 'secondary',
-        clearable: true,
+    VCard: {
+      color: "primary",
+      variant: "outlined",
+      density: "compact",
+      baseColor: "background",
+      bgColor: "secondary",
+      clearable: true,
     },
+
     VCardTitle: {
       style: {
         "font-size": "12px",
         "font-weight": "bold",
         "font-color": "white",
       },
+    },
+
+    VSelect: {
+      variant: "outlined",
+      density: "compact",
+      color: "selectText",
+      bgColor: "secondary",
+      clearable: true,
     },
     VMain: {
       style: {
