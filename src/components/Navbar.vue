@@ -11,17 +11,19 @@
 export default {
   name: "Navbar",
   props: {
-    title: {
-      type: String,
-      default: "Material Receipt",
-    },
+    title: {type: String, default: 'Material Receipt'},
+    backRoute: {type: String, default: null}
   },
   methods: {
     goBack() {
-      window.history.back();
-    },
-  },
-};
+      if (this.backRoute) {
+        this.$router.push({name: this.backRoute});
+      } else {
+        window.history.back();
+      }
+    }
+  }
+}
 </script>
 
 <style scoped>

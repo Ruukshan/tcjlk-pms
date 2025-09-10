@@ -2,7 +2,7 @@
   <v-main>
     <v-container fluid>
       <v-card elevation="0">
-        <Navbar title="Quality Control 2" />
+        <Navbar title="Quality Control 2" back-route="TJCQA1" />
 
         <v-card-text>
           <v-form ref="form" v-model="valid">
@@ -28,16 +28,18 @@
                 <v-text-field
                     placeholder="Enter temperature 1"
                     v-model="qc.temperature1"
-                    :rules="[rules.required, rules.number]"
-                    type="number"
+                    :rules="[rules.required,rules.temperature]"
+                    
                 />
               </v-col>
               <v-col cols="6">
                 <v-label>Time 1</v-label>
                 <v-text-field
-                    placeholder="Enter time 1"
                     v-model="qc.time1"
+                    type="time"
+                    placeholder="Select time 1"
                     :rules="[rules.required]"
+                    hide-details="auto"
                 />
               </v-col>
 
@@ -46,16 +48,18 @@
                 <v-text-field
                     placeholder="Enter temperature 2"
                     v-model="qc.temperature2"
-                    :rules="[rules.required, rules.number]"
-                    type="number"
+                    :rules="[rules.required,rules.temperature]"
+                     
                 />
               </v-col>
               <v-col cols="6">
                 <v-label>Time 2</v-label>
                 <v-text-field
-                    placeholder="Enter time 2"
-                    v-model="qc.time2"
-                    :rules="[rules.required]"
+                  v-model="qc.time2"
+                  type="time"
+                  placeholder="Select time 2"
+                  :rules="[rules.required]"
+                  hide-details="auto"
                 />
               </v-col>
 
@@ -64,16 +68,18 @@
                 <v-text-field
                     placeholder="Enter temperature 3"
                     v-model="qc.temperature3"
-                    :rules="[rules.required, rules.number]"
-                    type="number"
+                    :rules="[rules.required,rules.temperature]"
+                    
                 />
               </v-col>
               <v-col cols="6">
                 <v-label>Time 3</v-label>
                 <v-text-field
-                    placeholder="Enter time 3"
                     v-model="qc.time3"
+                    type="time"
+                    placeholder="Select time 3"
                     :rules="[rules.required]"
+                    hide-details="auto"
                 />
               </v-col>
 
@@ -83,7 +89,7 @@
                     placeholder="Enter batch quantity"
                     v-model="qc.batchQuantity"
                     :rules="[rules.required, rules.number]"
-                    type="number"
+                   
                 />
               </v-col>
 
@@ -142,6 +148,10 @@ import { collection, addDoc } from "firebase/firestore";
 import { db } from "../services/firebase";
 import Navbar from "@/components/Navbar.vue";
 import DialogBox from "@/helper/utils/AppDialog.vue";
+import { useRouter } from 'vue-router';
+
+
+const router = useRouter();
 
 const form = ref(null);
 const valid = ref(false);
@@ -169,6 +179,9 @@ const qc = ref({
 const rules = {
   required: (v) => !!v || "This field is required",
   number: (v) => (!isNaN(v) && v >= 0) || "Must be a valid number",
+  temperature: (v) =>
+    /^(?:-?\d+(?:\.\d+)?)(?:°?\s?[CF])$/i.test(v) ||
+    "Temperature must include °C or °F (e.g., 80°C or 176°F)",
 };
 
 const submit = async () => {
@@ -201,6 +214,9 @@ const submit = async () => {
 
     form.value?.reset();
     valid.value = false;
+    router.push({ name: 'TJCPACKING' }); 
+
+
   } catch (error) {
     console.error("Error saving data: ", error);
     dialogTitle.value = "Error";
@@ -213,3 +229,6 @@ const submit = async () => {
   }
 };
 </script>
+
+
+

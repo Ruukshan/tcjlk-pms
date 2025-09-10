@@ -2,7 +2,7 @@
   <v-main>
     <v-container fluid>
       <v-card elevation="0">
-        <Navbar title="Packing" />
+        <Navbar title="Packing" back-route="TJCQ2"/>
         <v-spacer></v-spacer>
         <v-card-text>
           <v-form ref="packingForm" v-model="valid" lazy-validation>

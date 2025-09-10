@@ -2,7 +2,7 @@
   <v-main>
     <v-container fluid>
       <v-card elevation="0">
-        <Navbar title="Processing" />
+        <Navbar title="Processing" back-route="MRPage"/>
         <v-card-text>
           <!-- Processing form -->
           <v-form ref="processingForm" v-model="valid" lazy-validation>
@@ -166,6 +166,10 @@ import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { db } from "@/services/firebase.js";
 import Navbar from "@/components/Navbar.vue";
 import AppDialog from "@/helper/utils/AppDialog.vue";
+import { useRouter } from 'vue-router';
+
+
+const router = useRouter();
 
 // Form validation state
 const valid = ref(false);
@@ -220,6 +224,9 @@ const submitForm = async () => {
     successDialog.value = true;
     resetForm();
     console.log("Processing data submitted successfully:", processingData);
+     router.push({ name: 'TJCQA1' }); 
+
+
   } catch (error) {
     console.error("Error submitting processing data:", error);
     errorMessage.value = "Failed to submit data. Please try again.";

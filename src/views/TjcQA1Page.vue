@@ -2,7 +2,7 @@
         <v-main>
         <v-container fluid>
             <v-card elevation="0">
-                <Navbar title="Quality Control 1 "/>
+                <Navbar title="Quality Control 1 " back-route="TJCPROCESSING"/>
                 <v-card-text>
                     <v-form ref="form" v-model="valid">
                         <v-row justify="center">
@@ -116,6 +116,10 @@ import { ref } from 'vue';
 import { collection, addDoc } from "firebase/firestore";
 import { db } from '../services/firebase';
 import AppDialog from '../helper/utils/AppDialog.vue';
+import { useRouter } from 'vue-router';
+
+
+const router = useRouter();
 
 
 const form = ref(null);
@@ -197,6 +201,7 @@ const submit = async () => {
         console.log("Document written with ID: ");
         successDialog.value=true;
         resetForm();
+        router.push({ name: 'TJCQ2' }); 
     } catch (error) {
         console.error("Error adding document: ${e.message}");
         errorMessage.value = "An error occurred while submitting the form. Please try again.";

@@ -2,7 +2,7 @@
   <v-main>
     <v-container fluid>
       <v-card elevation="0">
-        <Navbar title="Material Recipt " />
+        <Navbar title="Material Recipt " back-route="GRNPage" />
 
         <v-card-text>
           <v-form ref="form" class="pb-10">
@@ -77,8 +77,7 @@
                 <v-text-field
                     v-model="receipt.unitWeight"
                     placeholder="Enter unit weight"
-                    type="number"
-                    :rules="[rules.required, rules.number]"
+                    :rules="[rules.required, rules.unitWeight]"
                 />
               </v-col>
 
@@ -110,6 +109,9 @@ import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { db } from "../services/firebase";
 import Navbar from "@/components/Navbar.vue";
 import DialogBox from "@/helper/utils/AppDialog.vue";
+import { useRouter } from 'vue-router';  
+
+const router = useRouter();
 
 const form = ref(null);
 const valid = ref(false)
@@ -135,7 +137,9 @@ const items = ["Item 1", "Item 2", "Item 3"];
 
 const rules = {
   required: v => !!v || "This field is required",
-  number: v => (!isNaN(v) && v > 0) || "Must be a valid number"
+  number: v => (!isNaN(v) && v > 0) || "Must be a valid number",
+  unitWeight: v =>
+    (!isNaN(v) && v > 0) || "Unit weight must be a positive number in Kg"
 };
 
 
@@ -164,6 +168,8 @@ const submit = async () => {
 
     form.value?.reset();
     valid.value = false;
+
+    router.push({ name: 'TJCPROCESSING' }); 
 
 
   } catch (error) {
