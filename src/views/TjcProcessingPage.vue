@@ -234,5 +234,6 @@ const submitForm = async () => {
 /* Add spacing between form sections */
 div {
   margin-bottom: 18px;
+  margin-top: 8px;
 }
 </style>
