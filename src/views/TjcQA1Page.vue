@@ -134,7 +134,7 @@ const formData = ref({
     bodyLength: '',
     hookLength: '',
     overlapPercentage: '',
-    seamerCondition: '',
+    seamerCondition: null,
 })
 
 // Sample select data
@@ -178,7 +178,7 @@ const resetForm = () => {
         bodyLength: '',
         hookLength: '',
         overlapPercentage: '',
-        seamerCondition: '',
+        seamerCondition: null,
     };
     form.value.resetValidation();
 };

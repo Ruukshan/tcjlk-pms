@@ -6,6 +6,7 @@ import "@mdi/font/css/materialdesignicons.css";
 import { createVuetify } from "vuetify";
 import * as components from "vuetify/components";
 import * as directives from "vuetify/directives";
+import Color from "vuetify/directives/color";
 
 export default createVuetify({
   components,
@@ -35,13 +36,13 @@ export default createVuetify({
     },
     VLabel: {
       style: {
-        color: "#fff", // label color
+        color: "#FFFFFF", 
       },
     },
     VTextField: {
       variant: "outlined",
       density: "compact",
-      color: "secondary",
+      bgColor: "secondary",
       style: {
         color: "#fff", // text color inside input
       },
@@ -54,7 +55,6 @@ export default createVuetify({
       bgColor: "secondary",
       clearable: true,
     },
-
     VCardTitle: {
       style: {
         "font-size": "12px",
@@ -62,15 +62,20 @@ export default createVuetify({
         "font-color": "white",
       },
     },
-
     VSelect: {
       variant: "outlined",
       density: "compact",
       color: "selectText",
       bgColor: "secondary",
       clearable: true,
+      persistentPlaceholder: true,
     },
-
+    VMenu: {
+      contentClass: 'custom-select-menu',
+    },
+    VList: {
+      bgColor: 'selectText',
+    },
     VTextarea: {
       variant: "outlined",
       density: "compact",
@@ -79,7 +84,6 @@ export default createVuetify({
         color: "#fff",
       },
     },
-
     VMain: {
       style: {
         "background-color": "#241F0F",
