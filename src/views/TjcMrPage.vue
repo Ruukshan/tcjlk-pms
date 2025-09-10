@@ -112,6 +112,7 @@ import Navbar from "@/components/Navbar.vue";
 import DialogBox from "@/helper/utils/AppDialog.vue";
 
 const form = ref(null);
+const valid = ref(false)
 const loading = ref(false);
 const dialog = ref(false);
 const dialogTitle = ref("");
@@ -137,16 +138,12 @@ const rules = {
   number: v => (!isNaN(v) && v > 0) || "Must be a valid number"
 };
 
-const resetForm = () => {
-  Object.keys(receipt).forEach(key => (receipt[key] = ""));
-  form.value.resetValidation();
-};
 
 const submit = async () => {
   loading.value = true;
 
-  const { valid } = await form.value.validate();
-  if (!valid) {
+  const { valid:isValid } = await form.value.validate();
+  if (!isValid) {
     loading.value = false;
     return;
   }
@@ -156,7 +153,7 @@ const submit = async () => {
       ...receipt,
       quantity: Number(receipt.quantity),
       unitWeight: Number(receipt.unitWeight),
-      createdAt: serverTimestamp()
+
     });
 
     dialogTitle.value = "Success";
@@ -165,7 +162,10 @@ const submit = async () => {
     dialogColor.value = "green";
     dialog.value = true;
 
-    resetForm();
+    form.value?.reset();
+    valid.value = false;
+
+
   } catch (error) {
     console.error("Error saving data: ", error);
 
