@@ -141,7 +141,7 @@ const errorMessage = ref('');
 // Form data
 const formData = ref({
     item: '',
-    supplier: '',
+    supplier: null,
     quantity: '',
     quality: '',
     unit: '',
@@ -200,7 +200,7 @@ const stockReviewVerifyDateRules = [
 const resetForm = () => {
     formData.value = {
         item: '',
-        supplier: '',
+        supplier: null,
         quantity: '',
         quality: '',
         unit: '',
