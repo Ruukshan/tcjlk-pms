@@ -2,7 +2,6 @@
   <v-app>
    
     <TjcProcessingPage />
-    
   </v-app>
 </template>
 

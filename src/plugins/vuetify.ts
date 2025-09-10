@@ -34,6 +34,9 @@ export default createVuetify({
       variant: "outlined",
       density: "compact",
       color: "secondary",
+      style: {
+        color: "#fff", // text color inside input
+      },
     },
     VCard: {
       color: "primary",
@@ -59,6 +62,11 @@ export default createVuetify({
     VMain: {
       style: {
         "background-color": "#241F0F",
+      },
+    },
+    VLabel: {
+      style: {
+        color: "#fff", // label color
       },
     },
   },

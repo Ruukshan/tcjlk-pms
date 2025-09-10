@@ -2,7 +2,6 @@
   <v-main>
     <v-container fluid>
       <v-card elevation="0">
-    
         <Navbar title="Processing" />
         <v-card-text>
           <!-- Processing form -->
@@ -72,6 +71,7 @@
               <v-label>Exhaust Time Start</v-label>
               <v-text-field
                 v-model="formData.ExhaustStartTime"
+                type="time"
                 placeholder="Enter StartTime"
                 :rules="[rules.required]"
                 hide-details="auto"
@@ -82,6 +82,7 @@
               <v-label>Exhaust Time End</v-label>
               <v-text-field
                 v-model="formData.ExhaustEndTime"
+                type="time"
                 placeholder="Enter EndTime"
                 :rules="[rules.required]"
                 hide-details="auto"
@@ -92,6 +93,7 @@
               <v-label>Seaming Batch Start Time</v-label>
               <v-text-field
                 v-model="formData.SeamingStartTime"
+                type="time"
                 placeholder="Enter StartTime"
                 :rules="[rules.required]"
                 hide-details="auto"
@@ -102,6 +104,7 @@
               <v-label>Seaming Batch End Time</v-label>
               <v-text-field
                 v-model="formData.SeamingEndTime"
+                type="time"
                 placeholder="Enter EndTime"
                 :rules="[rules.required]"
                 hide-details="auto"
